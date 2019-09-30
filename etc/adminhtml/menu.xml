@@ -1,0 +1,20 @@
+<?xml version="1.0"?>
+<!--
+/**
+ * Copyright © Magento, Inc. All rights reserved.
+ * See COPYING.txt for license details.
+ */
+-->
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Backend:etc/menu.xsd">
+    <menu>
+        <add id="NathanDay_Usp::usp_block"
+             title="USP Blocks"
+             translate="title"
+             module="NathanDay_Usp"
+             sortOrder="30"
+             parent="Magento_Backend::content_elements"
+             action="usp/block"
+             resource="NathanDay_Usp::block"/>
+    </menu>
+</config>

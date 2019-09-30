@@ -1,0 +1,89 @@
+<?xml version="1.0"?>
+<schema xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:noNamespaceSchemaLocation="urn:magento:framework:Setup/Declaration/Schema/etc/schema.xsd">
+    <table name="usp_block" 
+           resource="default" 
+           engine="innodb" 
+           comment="USP Block Table">
+        <column xsi:type="smallint" 
+                name="block_id" 
+                padding="6" 
+                unsigned="false" 
+                nullable="false" 
+                identity="true"
+                comment="Entity ID"/>
+        <column xsi:type="varchar" 
+                name="title" 
+                nullable="false" 
+                length="255" 
+                comment="Block Title"/>
+        <column xsi:type="varchar" 
+                name="identifier" 
+                nullable="false" 
+                length="255" 
+                comment="Block String Identifier"/>
+        <column xsi:type="mediumtext" 
+                name="content" 
+                nullable="true" 
+                comment="Block Content"/>
+        <column xsi:type="timestamp" 
+                name="creation_time" 
+                on_update="false" 
+                nullable="false" 
+                default="CURRENT_TIMESTAMP"
+                comment="Block Creation Time"/>
+        <column xsi:type="timestamp" 
+                name="update_time" 
+                on_update="true" 
+                nullable="false" 
+                default="CURRENT_TIMESTAMP"
+                comment="Block Modification Time"/>
+        <column xsi:type="smallint" 
+                name="is_active" 
+                padding="6" 
+                unsigned="false" 
+                nullable="false" 
+                identity="false"
+                default="1" 
+                comment="Is Block Active"/>
+        <constraint xsi:type="primary" referenceId="PRIMARY">
+            <column name="block_id"/>
+        </constraint>
+        <index referenceId="USP_BLOCK_TITLE_IDENTIFIER_CONTENT" indexType="fulltext">
+            <column name="title"/>
+            <column name="identifier"/>
+            <column name="content"/>
+        </index>
+    </table>
+    <table name="usp_block_store" resource="default" engine="innodb" comment="USP Block To Store Linkage Table">
+        <column xsi:type="smallint" name="block_id" padding="6" unsigned="false" nullable="false" identity="false"/>
+        <column xsi:type="smallint" 
+                name="store_id" 
+                padding="5" 
+                unsigned="true" 
+                nullable="false" 
+                identity="false"
+                comment="Store ID"/>
+        <constraint xsi:type="primary" referenceId="PRIMARY">
+            <column name="block_id"/>
+            <column name="store_id"/>
+        </constraint>
+        <constraint xsi:type="foreign" 
+                    referenceId="USP_BLOCK_STORE_BLOCK_ID_USP_BLOCK_BLOCK_ID" 
+                    table="usp_block_store"
+                    column="block_id" 
+                    referenceTable="usp_block" 
+                    referenceColumn="block_id" 
+                    onDelete="CASCADE"/>
+        <constraint xsi:type="foreign" 
+                    referenceId="USP_BLOCK_STORE_STORE_ID_STORE_STORE_ID" 
+                    table="usp_block_store"
+                    column="store_id" 
+                    referenceTable="store" 
+                    referenceColumn="store_id" 
+                    onDelete="CASCADE"/>
+        <index referenceId="USP_BLOCK_STORE_STORE_ID" indexType="btree">
+            <column name="store_id"/>
+        </index>
+    </table>
+</schema>

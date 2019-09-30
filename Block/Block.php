@@ -1,0 +1,83 @@
+<?php
+
+namespace NathanDay\Usp\Block;
+
+use Magento\Framework\View\Element\AbstractBlock;
+
+/**
+ * Cms block content block
+ */
+class Block extends AbstractBlock implements \Magento\Framework\DataObject\IdentityInterface
+{
+    /**
+     * @var \NathanDay\Usp\Model\Template\FilterProvider
+     */
+    protected $_filterProvider;
+
+    /**
+     * Store manager
+     *
+     * @var \Magento\Store\Model\StoreManagerInterface
+     */
+    protected $_storeManager;
+
+    /**
+     * Block factory
+     *
+     * @var \NathanDay\Usp\Model\BlockFactory
+     */
+    protected $_blockFactory;
+
+    /**
+     * Construct
+     *
+     * @param \Magento\Framework\View\Element\Context $context
+     * @param \NathanDay\Usp\Model\Template\FilterProvider $filterProvider
+     * @param \Magento\Store\Model\StoreManagerInterface $storeManager
+     * @param \NathanDay\Usp\Model\BlockFactory $blockFactory
+     * @param array $data
+     */
+    public function __construct(
+        \Magento\Framework\View\Element\Context $context,
+        \NathanDay\Usp\Model\Template\FilterProvider $filterProvider,
+        \Magento\Store\Model\StoreManagerInterface $storeManager,
+        \NathanDay\Usp\Model\BlockFactory $blockFactory,
+        array $data = []
+    ) {
+        parent::__construct($context, $data);
+        $this->_filterProvider = $filterProvider;
+        $this->_storeManager = $storeManager;
+        $this->_blockFactory = $blockFactory;
+    }
+
+    /**
+     * Prepare Content HTML
+     *
+     * @return string
+     */
+    protected function _toHtml()
+    {
+        $blockId = $this->getBlockId();
+        $html = '';
+        if ($blockId) {
+            $storeId = $this->_storeManager->getStore()->getId();
+            /** @var \NathanDay\Usp\Model\Block $block */
+            $block = $this->_blockFactory->create();
+            $block->setStoreId($storeId)->load($blockId);
+            if ($block->isActive()) {
+                $html = $this->_filterProvider->getBlockFilter()->setStoreId($storeId)->filter($block->getContent());
+            }
+        }
+        return $html;
+    }
+
+    /**
+     * Return identifiers for produced content
+     *
+     * @return array
+     */
+    public function getIdentities()
+    {
+        return [\NathanDay\Usp\Model\Block::CACHE_TAG . '_' . $this->getBlockId()];
+    }
+}
