@@ -108,5 +108,30 @@
                 width: #{percentage($width / 100)};
             }
         }
+
+        $lastRowColumns: $numSlides % $columns;
+        $lastRowWidth: 100 / $lastRowColumns;
+        @if ($lastRowColumns) != 0 {
+            &:nth-last-child(-n+#{$lastRowColumns}) {
+                width: percentage($lastRowWidth / 100);
+            }
+
+            @if $lastRowColumns > 1 {
+                @for $l from 1 through $lastRowColumns {
+                    $lastRowColumn: $l % $lastRowColumns;
+
+                    $left: 0;
+                    @if $lastRowColumn == 0 {
+                        $left: ($lastRowColumns - 1) * $lastRowWidth;
+                    } @else {
+                        $left: ($lastRowColumn - 1) * $lastRowWidth;
+                    }
+
+                    &:nth-child(#{$numSlides - ($lastRowColumns - $l)}) {
+                        left: #{percentage($left / 100)};
+                    }
+                }
+            }
+        }
     }
 }

@@ -4,6 +4,19 @@ $usp-banner-height: 50px;
 $border-width: 1px;
 
 .header.usp {
+    padding-top: 10px;
+    position: relative;
+
+    @media only screen and (min-width: 768px) {
+        box-sizing: border-box;
+        margin-left: auto;
+        margin-right: auto;
+        max-width: 1280px;
+        padding-left: 20px;
+        padding-right: 20px;
+        width: auto;
+    }
+
     .usp-blocks {
         &-list {
             display: flex;
@@ -72,7 +85,7 @@ $border-width: 1px;
             position: absolute;
             text-align: center;
             top: 0;
-            width: 100vw;
+            width: 100%;
 
             p {
                 margin: 0;
