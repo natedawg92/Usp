@@ -1,0 +1,82 @@
+@import '../mixins/slide-animation';
+
+$usp-banner-height: 50px;
+$border-width: 1px;
+
+.header.usp {
+    .usp-blocks {
+        &-list {
+            display: flex;
+            flex-flow: row;
+            flex-wrap: nowrap;
+            height: $usp-banner-height;
+            list-style: none;
+            margin: 0;
+            overflow: hidden;
+            padding: 0;
+            position: relative;
+
+            &.usp-s {
+                @for $slides from 1 through 8 {
+                    @for $columns from 1 through 8 {
+                        &-#{$slides}-#{$columns} {
+                            @include slide-animation('usp-#{$slides}-#{$columns}', $slides, 2, 0.5, $columns);
+                        }
+                    }
+                }
+            }
+
+            &.usp-m {
+                @media (min-width: 768px) {
+                    @for $slides from 1 through 8 {
+                        @for $columns from 1 through 8 {
+                            &-#{$slides}-#{$columns} {
+                                @include slide-animation('usp-#{$slides}-#{$columns}', $slides, 2, 0.5, $columns);
+                            }
+                        }
+                    }
+                }
+            }
+
+            &.usp-l {
+                @media (min-width: 992px) {
+                    @for $slides from 1 through 8 {
+                        @for $columns from 1 through 8 {
+                            &-#{$slides}-#{$columns} {
+                                @include slide-animation('usp-#{$slides}-#{$columns}', $slides, 2, 0.5, $columns);
+                            }
+                        }
+                    }
+                }
+            }
+
+            &.usp-xl {
+                @media (min-width: 1200px) {
+                    @for $slides from 1 through 8 {
+                        @for $columns from 1 through 8 {
+                            &-#{$slides}-#{$columns} {
+                                @include slide-animation('usp-#{$slides}-#{$columns}', $slides, 2, 0.5, $columns);
+                            }
+                        }
+                    }
+                }
+            }
+        }
+
+        &-item {
+            background: white;
+            border: $border-width solid transparent;
+            height: $usp-banner-height;
+            line-height: $usp-banner-height;
+            overflow: hidden;
+            position: absolute;
+            text-align: center;
+            top: 0;
+            width: 100vw;
+
+            p {
+                margin: 0;
+            }
+        }
+    }
+}

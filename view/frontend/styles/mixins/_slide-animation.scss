@@ -1,0 +1,112 @@
+@mixin keyframes($animation-name) {
+    @-webkit-keyframes #{$animation-name} {
+        @content;
+    }
+    @-moz-keyframes #{$animation-name} {
+        @content;
+    }
+    @-ms-keyframes #{$animation-name} {
+        @content;
+    }
+    @-o-keyframes #{$animation-name} {
+        @content;
+    }
+    @keyframes #{$animation-name} {
+        @content;
+    }
+}
+
+@mixin animation($str) {
+    -webkit-animation: #{$str};
+    -moz-animation: #{$str};
+    -ms-animation: #{$str};
+    -o-animation: #{$str};
+    animation: #{$str};
+}
+
+@mixin animation-delay($str) {
+    -webkit-animation-delay: #{$str};
+    -moz-animation-delay: #{$str};
+    -ms-animation-delay: #{$str};
+    -o-animation-delay: #{$str};
+    animation-delay: #{$str};
+}
+
+@mixin slide-animation($animationName, $numSlides, $displayTime, $transitionTime: 0.5, $columns: 1) {
+    $rows: ceil($numSlides / $columns);
+    $animationTime: ($rows * $displayTime) + ($rows * $transitionTime);
+    $displayPercentage: $displayTime / $animationTime * 100;
+    $transitionPercentage: $transitionTime / $animationTime * 100;
+    $waitPercentage: $displayPercentage * ($rows - 1) + $transitionPercentage * ($rows - 2);
+
+    @if $rows > 1 {
+        @include keyframes($animationName) {
+            $percentage: 0;
+            #{$percentage}% {
+                top: 0;
+                opacity: 1;
+            }
+
+            $percentage: $percentage + $displayPercentage;
+            #{$percentage}% {
+                top: 0;
+                opacity: 1;
+            }
+
+            $percentage: $percentage + $transitionPercentage;
+            #{$percentage}% {
+                top: -100%;
+                opacity: 0;
+            }
+
+            $percentage: $percentage + 1;
+            #{$percentage}% {
+                top: 100%;
+                opacity: 0;
+            }
+
+            $percentage: $percentage + ($waitPercentage - 1);
+            #{$percentage}% {
+                top: 100%;
+                opacity: 1;
+            }
+
+            $percentage: $percentage + $transitionPercentage;
+            #{$percentage}% {
+                top: 0;
+                opacity: 1;
+            }
+        }
+    }
+
+    .slide {
+        @include animation($animationName #{$animationTime}s linear infinite);
+        top: 0;
+
+        @for $i from 1 through $numSlides {
+            $delay: unset;
+            $top: 0;
+            $left: 0;
+            $width: 100 / $columns;
+            $column: $i % $columns;
+
+            @if $i > $columns {
+                $delay: #{(floor(($i - 0.5) / $columns)) * ($displayTime + $transitionTime)}s;
+                $top: 100%;
+            }
+
+            @if $column == 0 {
+                $left: ($columns - 1) * $width;
+            } @else {
+                $left: ($column - 1) * $width;
+            }
+
+            &:nth-child(#{$i}) {
+                @include animation-delay($delay);
+                left: #{$left}vw;
+                top: $top;
+                width: #{$width}vw;
+            }
+        }
+    }
+}

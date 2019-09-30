@@ -1,0 +1,21 @@
+<?xml version="1.0"?>
+<page xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+      xsi:noNamespaceSchemaLocation="urn:magento:framework:View/Layout/etc/page_configuration.xsd">
+    <head>
+        <css src="NathanDay_Usp::css/styles.css"/>
+    </head>
+    <body>
+        <referenceContainer name="header.container">
+            <container name="header-usp"
+                       label="Page USP"
+                       as="header-usp"
+                       htmlTag="div"
+                       htmlClass="header usp"
+                       after="-" >
+                <block class="NathanDay\Usp\Block\Header\Banner"
+                       name="usp-banner"
+                       template="NathanDay_Usp::usp-banner.phtml" />
+            </container>
+        </referenceContainer>
+    </body>
+</page>

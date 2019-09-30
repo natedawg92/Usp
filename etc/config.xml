@@ -1,0 +1,16 @@
+<?xml version="1.0"?>
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Store:etc/config.xsd">
+    <default>
+        <usp_config>
+            <general>
+                <enable>1</enable>
+                <count>4</count>
+                <blocks_s>1</blocks_s>
+                <blocks_m>2</blocks_m>
+                <blocks_l>3</blocks_l>
+                <blocks_xl>4</blocks_xl>
+            </general>
+        </usp_config>
+    </default>
+</config>
