@@ -5,6 +5,7 @@ namespace NathanDay\Usp\Block\Header;
 use Magento\Framework\View\Element\Template;
 use NathanDay\Usp\Model\ResourceModel\Block\CollectionFactory as BlockCollectionFactory;
 use Magento\Store\Model\ScopeInterface;
+use Magento\Framework\Data\Collection;
 
 class Banner extends Template
 {
@@ -45,6 +46,7 @@ class Banner extends Template
         return $this->blockCollectionFactory->create()
             ->addStoreFilter($this->_storeManager->getStore()->getId())
             ->addFieldToFilter('is_active', 1)
+            ->setOrder('sort_order', Collection::SORT_ORDER_DESC)
             ->setPageSize($pageSize);
     }
 
