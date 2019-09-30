@@ -103,9 +103,9 @@
 
             &:nth-child(#{$i}) {
                 @include animation-delay($delay);
-                left: #{$left}vw;
+                left: #{percentage($left / 100)};
                 top: $top;
-                width: #{$width}vw;
+                width: #{percentage($width / 100)};
             }
         }
     }
