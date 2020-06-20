@@ -1,12 +1,9 @@
 <?php
-/**
- * Copyright © Magento, Inc. All rights reserved.
- * See COPYING.txt for license details.
- */
+
 namespace NathanDay\Usp\Block\Adminhtml\Block\Widget;
 
 /**
- * CMS block chooser for Wysiwyg CMS widget
+ * USP block chooser for Wysiwyg USP widget
  */
 class Chooser extends \Magento\Backend\Block\Widget\Grid\Extended
 {
@@ -62,7 +59,7 @@ class Chooser extends \Magento\Backend\Block\Widget\Grid\Extended
     public function prepareElementHtml(\Magento\Framework\Data\Form\Element\AbstractElement $element)
     {
         $uniqId = $this->mathRandom->getUniqueHash($element->getId());
-        $sourceUrl = $this->getUrl('cms/block_widget/chooser', ['uniq_id' => $uniqId]);
+        $sourceUrl = $this->getUrl('usp/block_widget/chooser', ['uniq_id' => $uniqId]);
 
         $chooser = $this->getLayout()->createBlock(
             \Magento\Widget\Block\Adminhtml\Widget\Chooser::class
@@ -117,7 +114,7 @@ class Chooser extends \Magento\Backend\Block\Widget\Grid\Extended
     }
 
     /**
-     * Prepare Cms static blocks collection
+     * Prepare Usp static blocks collection
      *
      * @return \Magento\Backend\Block\Widget\Grid\Extended
      */
@@ -128,7 +125,7 @@ class Chooser extends \Magento\Backend\Block\Widget\Grid\Extended
     }
 
     /**
-     * Prepare columns for Cms blocks grid
+     * Prepare columns for Usp blocks grid
      *
      * @return \Magento\Backend\Block\Widget\Grid\Extended
      */
@@ -166,6 +163,6 @@ class Chooser extends \Magento\Backend\Block\Widget\Grid\Extended
      */
     public function getGridUrl()
     {
-        return $this->getUrl('cms/block_widget/chooser', ['_current' => true]);
+        return $this->getUrl('usp/block_widget/chooser', ['_current' => true]);
     }
 }

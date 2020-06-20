@@ -5,7 +5,7 @@ namespace NathanDay\Usp\Block;
 use Magento\Framework\View\Element\AbstractBlock;
 
 /**
- * Cms block content block
+ * Usp block content block
  */
 class Block extends AbstractBlock implements \Magento\Framework\DataObject\IdentityInterface
 {
