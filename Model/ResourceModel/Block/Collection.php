@@ -81,6 +81,29 @@ class Collection extends AbstractCollection
     }
 
     /**
+     * Add filter by active state
+     *
+     * @return $this
+     */
+    public function addIsActiveFilter() : self
+    {
+        $this->addFieldToFilter('is_active', (int)true);
+
+        return $this;
+    }
+
+    public function filterByIdentifier($identifiers) : self
+    {
+        if (!is_array($identifiers)) {
+            $identifiers = [$identifiers];
+        }
+
+        $this->addFieldToFilter('identifier', ['in' => $identifiers]);
+
+        return $this;
+    }
+
+    /**
      * Join store relation table if there is store filter
      *
      * @return void

@@ -1,0 +1,60 @@
+<widgets xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Widget:etc/widget.xsd">
+    <widget class="NathanDay\Usp\Block\Widget\Banner" id="usp_banner">
+        <label>USP Banner</label>
+        <description>Add a USP Banner to any page</description>
+        <parameters>
+            <parameter name="usp_block_ids"
+                       xsi:type="multiselect"
+                       visible="true"
+                       required="true"
+                       sort_order="10"
+                       source_model="NathanDay\Usp\Model\Config\Source\UspBlocks">
+                <label translate="true">USP Blocks</label>
+                <description translate="true">Select the USP Blocks you want to show on the page</description>
+            </parameter>
+            <parameter name="mobile"
+                       xsi:type="select"
+                       visible="true"
+                       required="true"
+                       sort_order="20"
+                       source_model="NathanDay\Usp\Model\Config\Source\Numbers">
+                <label translate="true">Mobile</label>
+                <description translate="true">How many USP Blocks to show on a mobile viewport ( &lt;768px )</description>
+            </parameter>
+            <parameter name="tablet"
+                       xsi:type="select"
+                       visible="true"
+                       required="true"
+                       sort_order="30"
+                       source_model="NathanDay\Usp\Model\Config\Source\Numbers">
+                <label translate="true">Tablet</label>
+                <description translate="true">
+                    How many USP Blocks to show on a Tablet viewport ( &gt;=768px &lt;992px )
+                </description>
+            </parameter>
+            <parameter name="desktop"
+                       xsi:type="select"
+                       visible="true"
+                       required="true"
+                       sort_order="40"
+                       source_model="NathanDay\Usp\Model\Config\Source\Numbers">
+                <label translate="true">Desktop</label>
+                <description translate="true">
+                    How many USP Blocks to show on a small Desktop viewport ( &gt;=992px &lt;1200px )
+                </description>
+            </parameter>
+            <parameter name="large_desktop"
+                       xsi:type="select"
+                       visible="true"
+                       required="true"
+                       sort_order="50"
+                       source_model="NathanDay\Usp\Model\Config\Source\Numbers">
+                <label translate="true">Desktop</label>
+                <description translate="true">
+                    How many USP Blocks to show on a large Desktop viewport ( &gt;=1200px )
+                </description>
+            </parameter>
+        </parameters>
+    </widget>
+</widgets>

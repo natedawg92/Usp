@@ -5,16 +5,13 @@
         <css src="NathanDay_Usp::css/styles.css"/>
     </head>
     <body>
-        <referenceContainer name="header.container">
+        <referenceContainer name="top.container">
             <container name="header-usp"
-                       label="Page USP"
+                       label="USP Container"
                        as="header-usp"
                        htmlTag="div"
                        htmlClass="header usp"
-                       after="-" >
-                <block class="NathanDay\Usp\Block\Header\Banner"
-                       name="usp-banner"
-                       template="NathanDay_Usp::usp-banner.phtml" />
+                       before="-" >
             </container>
         </referenceContainer>
     </body>

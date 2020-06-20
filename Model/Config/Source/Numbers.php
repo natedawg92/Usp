@@ -2,7 +2,9 @@
 
 namespace NathanDay\Usp\Model\Config\Source;
 
-class Numbers
+use Magento\Framework\Data\OptionSourceInterface;
+
+class Numbers implements OptionSourceInterface
 {
     const NUMBER_STRINGS = [
         1 => 'One',
